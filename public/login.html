@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录</title>
+</head>
+
+<body>
+    <form action="" id="loginForm">
+        <div>
+            <label for="">用户名<input type="text" name="name"></label>
+        </div>
+        <div>
+            <label for="">密码<input type="password" name="password"></label>
+        </div>
+        <div>
+            <button type="submit">登录</button>
+        </div>
+    </form>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script>
+        const $form = $('#loginForm')
+        $form.on('submit', (e) => {
+            e.preventDefault()
+            const name = $form.find('input[name=name]').val()
+            const password = $form.find('input[name=password]').val()
+            console.log(name, password)
+            $.ajax({
+                method: 'POST',
+                url: '/login',
+                contentType: 'text/json;charset=UTF-8',
+                data: JSON.stringify({ name, password })
+                // 成功之后要做的事情，第一个参数是成功之后要做的事情，第二个参数是失败之后要做的事情
+            }).then(() => {
+                alert("登录成功")
+                location.href = '/home.html'
+            }, () => { })
+        })
+    </script>
+</body>
+
+</html>
